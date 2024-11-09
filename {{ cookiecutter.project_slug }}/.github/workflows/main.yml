@@ -34,10 +34,10 @@ jobs:
         conan profile detect
         conan install . --output-folder=build --build=missing
     - name: Configure Meson
-      run: meson setup --native-file ${{github.workspace}}/build/conan_meson_native.ini ${{github.workspace}}/build
+      run: meson setup --native-file build/conan_meson_native.ini build
 
     - name: Build
-      run: meson compile -C ${{github.workspace}}/build
+      run: meson compile -C build
 
     - name: Test
-      run: meson test -C ${{github.workspace}}/build
+      run: meson test -C build
