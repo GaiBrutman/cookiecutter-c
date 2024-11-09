@@ -1,10 +1,10 @@
 project(
   '{{ cookiecutter.project_slug }}',
   'c',
-  version: '0.1.0',
+  version: '{{ cookiecutter.version }}',
   meson_version: '>=0.50.0',
   default_options: ['buildtype=release', 'warning_level=1'],
-  license: 'MIT',
+  license: '{{ cookiecutter.license }}',
 )
 
 project_headers = include_directories('include')
