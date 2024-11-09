@@ -11,8 +11,8 @@ src/                    All .c files
 include/                All .h files. Used as "#include {{ cookiecutter.project_slug }}/header.h"
     {{ cookiecutter.project_slug }}/
 tests/                  All test files
-build/                  Build directory
-conanfile.txt           Conan dependencies
+build/                  Build directory (gitignored)
+conanfile.py            Conan package file
 meson.build             Meson build file
 requirements.txt        Python requirements
 .gitignore              Git ignore file
@@ -31,9 +31,7 @@ README.md               This file
 ### Building
 
 ```bash
-conan install . --output-folder=build --build=missing # Install dependencies
-meson setup --native-file build/conan_meson_native.ini build
-meson compile -C build/
+conan build .
 ```
 
 ### Testing
@@ -41,7 +39,7 @@ meson compile -C build/
 The Unity test framework is used for unit testing.
 
 ```bash
-meson test -C build/
+conan test . {{ cookiecutter.project_slug }}/latest
 ```
 
 ### VSCode Integration
