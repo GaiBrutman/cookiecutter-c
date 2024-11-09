@@ -1,0 +1,43 @@
+name: Build & UT CI
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install system requirements
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip3 install -r requirements.txt
+    - uses: pre-commit/action@v3.0.1
+
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install system requirements
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build python3-pip
+        pip3 install -r requirements.txt
+
+    - name: Install dependencies
+      run: |
+        conan profile detect
+        conan install . --output-folder=build --build=missing
+    - name: Configure Meson
+      run: meson setup --native-file ${{github.workspace}}/build/conan_meson_native.ini ${{github.workspace}}/build
+
+    - name: Build
+      run: meson compile -C ${{github.workspace}}/build
+
+    - name: Test
+      run: meson test -C ${{github.workspace}}/build
