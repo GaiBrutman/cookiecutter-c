@@ -1,18 +1,27 @@
-# c-template
+# {{ cookiecutter.project_name }}
 
-A C project cookiecutter
+{{ cookiecutter.project_description }}
 
-## Library
+Using meson for compilation and conan for library management.
 
-Using meson for compilation and conan for library managment.
+## Structure
 
-### Structure
+```txt
+src/                    All .c files
+include/                All .h files. Used as "#include {{ cookiecutter.project_slug }}/header.h"
+    {{ cookiecutter.project_slug }}/
+tests/                  All test files
+build/                  Build directory
+conanfile.txt           Conan dependencies
+meson.build             Meson build file
+requirements.txt        Python requirements
+.gitignore              Git ignore file
+README.md               This file
+.clang-format           Clang formatting options
+.pre-commit-config.yaml Pre-commit configuration
+```
 
-src/                All .c files
-include/
-    {{ cookiecutter.project_slug }}  All .h files. Uses as "#include {{ cookiecutter.project_slug }}/header.h"
-
-### Dependencies
+## Dependencies
 
 - [meson](https://mesonbuild.com/) for building.
 - [ninja](https://ninja-build.org/) for building.
@@ -34,3 +43,7 @@ The Unity test framework is used for unit testing.
 ```bash
 meson test -C build/
 ```
+
+### VSCode Integration
+
+Open {{ cookiecutter.project_slug }}.code-workspace in VSCode
