@@ -2,8 +2,6 @@
 
 {{ cookiecutter.project_description }}
 
-Using meson for compilation and conan for library management.
-
 ## Structure
 
 ```txt
