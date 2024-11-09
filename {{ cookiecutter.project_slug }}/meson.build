@@ -7,9 +7,16 @@ project(
   license: '{{ cookiecutter.license }}',
 )
 
+# Source files to link with the unit tests.
+source_files = []
+
 project_headers = include_directories('include')
-project_source_files = ['src/{{ cookiecutter.project_slug }}.c']
 project_test_files = ['tests/test_sanity.c']
+
+{% if cookiecutter.project_type == 'Library' -%}
+project_source_files = [
+  'src/{{ cookiecuttr.project_slug }}.c',
+]
 
 project_target = library(
   meson.project_name(),
@@ -18,10 +25,22 @@ project_target = library(
   install: true,
 )
 
-# Make this library usable as a Meson subproject.
+{% elif cookiecutter.project_type == 'Executable' %}
+# Exclude the main source file to link other objects with unit tests.
+project_source_files = []
+
+project_target = executable(
+  meson.project_name(),
+  project_source_files + ['src/main.c'],
+  include_directories: project_headers,
+)
+{% endif %}
+
+# Make objects usable as a static library.
+# Make objects usable as a static library.
 project_dep = declare_dependency(
   include_directories: project_headers,
-  link_with: project_target,
+  objects: project_target.extract_objects(source_files),
 )
 
 if not meson.is_subproject()
