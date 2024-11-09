@@ -1,0 +1,52 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {},
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "_setup",
+                "type": "shell",
+                "command": "conan install . --output-folder=build --build=missing && meson setup --native-file build/conan_meson_native.ini build",
+                "hide": true,
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+            {
+                "label": "build",
+                "type": "shell",
+                "dependsOn": "_setup",
+                "command": "meson compile -C build/",
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+            {
+                "label": "test",
+                "dependsOn": "_setup",
+                "type": "shell",
+                "command": "meson test -C build/",
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+            {
+                "label": "clean",
+                "type": "shell",
+                "command": "rm -r build/",
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+        ]
+    }
+}
