@@ -3,7 +3,7 @@ project(
   'c',
   version: '{{ cookiecutter.version }}',
   meson_version: '>=1.1.0',
-  default_options: ['buildtype=release', 'warning_level=1'],
+  default_options: ['buildtype=release', 'warning_level=3'],
   license: '{{ cookiecutter.license }}',
 )
 
