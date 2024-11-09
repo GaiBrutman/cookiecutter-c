@@ -15,7 +15,7 @@ project_test_files = ['tests/test_sanity.c']
 
 {% if cookiecutter.project_type == 'Library' -%}
 project_source_files = [
-  'src/{{ cookiecuttr.project_slug }}.c',
+  'src/{{ cookiecutter.project_slug }}.c',
 ]
 
 project_target = library(
