@@ -26,6 +26,23 @@ README.md               This file
 - [conan](https://conan.io/) for package management.
 - [Unity](https://www.throwtheswitch.org/unity) for testing.
 
+## Usage
+
+### Getting started
+
+Set up a virtual environment.
+
+```bash
+python3 -m venv venv
+. venv/bin/activate
+```
+
+Install pre-commit hooks.
+
+```bash
+pre-commit install
+```
+
 ### Building
 
 ```bash
