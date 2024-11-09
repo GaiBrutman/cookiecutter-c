@@ -4,7 +4,10 @@
             "path": "."
         }
     ],
-    "settings": {},
+    "settings": {
+        "C_Cpp.default.compileCommands": "build/compile_commands.json",
+        "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
+    },
     "tasks": {
         "version": "2.0.0",
         "tasks": [
