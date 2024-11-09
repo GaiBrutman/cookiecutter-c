@@ -29,15 +29,11 @@ jobs:
         sudo apt-get install -y ninja-build python3-pip
         pip3 install -r requirements.txt
 
-    - name: Install dependencies
-      run: |
-        conan profile detect
-        conan install . --output-folder=build --build=missing
-    - name: Configure Meson
-      run: meson setup --native-file build/conan_meson_native.ini build
+    - name: Detect profile
+      run: conan profile detect
 
     - name: Build
-      run: meson compile -C build
+      run: conan build .
 
     - name: Test
-      run: meson test -C build
+      run: conan test . {{ cookiecutter.project_slug }}/latest
