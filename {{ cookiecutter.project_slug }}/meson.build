@@ -33,7 +33,7 @@ project_target = executable(
 # Make objects usable as a static library.
 project_dep = declare_dependency(
   include_directories: project_headers,
-  objects: project_target.extract_objects(source_files),
+  objects: project_target.extract_objects(project_source_files),
 )
 
 if not meson.is_subproject()
